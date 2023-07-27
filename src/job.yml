@@ -1,15 +1,13 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
 code: model
 command: >-
-  python 
-  --
-  --
+  python train.py
+  --diabetes-csv ${{inputs.diabetes_csv}}
 inputs:
-  training_data: 
-    type: uri_folder 
-    path: 
-  reg_rate: 0.01
+  diabetes_csv: 
+    type: uri_file 
+    path: https://github.com/HenryUdeogu/mslearn-mlops/blob/main/experimentation/data/diabetes-dev.csv
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
-compute: 
-experiment_name: 
-description: 
+compute: azureml:cpu-cluster
+experiment_name: azure_mlops-challenge1-diabetes-example
+description: Train a scikit-learn LinearRegression model on the Diabetes dataset.
